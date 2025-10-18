@@ -54,7 +54,7 @@ FROM products
 ORDER BY profit_margin DESC;
 ```
 
-### Highest Return Rate
+###  Highest Return Rate
 ```sql
 SELECT 
     p.product_name,
@@ -68,7 +68,7 @@ GROUP BY p.product_name
 ORDER BY return_rate DESC;
 ```
 
-### Lifetime Value (LTV) of Customers
+###  Lifetime Value (LTV) of Customers
 ```sql
 SELECT 
     c.customer_id,
@@ -82,7 +82,7 @@ GROUP BY c.customer_id, c.name
 ORDER BY lifetime_value DESC;
 ```
 
-### Revenue vs Returns by Region
+###  Revenue vs Returns by Region
 ```sql
 SELECT 
     c.region,
@@ -97,7 +97,7 @@ GROUP BY c.region
 ORDER BY net_revenue DESC;
 ```
 
-### Seasonal Sales Trends
+###  Seasonal Sales Trends
 ```sql
 SELECT 
     MONTHNAME(order_date) AS month,
