@@ -8,6 +8,7 @@ The goal is to simulate real-world business problems and demonstrate how **data 
 
 ---
 
+
 ## 🧱 Database Schema  
 
  **Database Name:** `retail_sales_db`  
@@ -20,6 +21,7 @@ The goal is to simulate real-world business problems and demonstrate how **data 
 |  **products** | Product catalog with pricing and cost information. | `product_id`, `product_name`, `category`, `price`, `cost_price` |
 |  **payments** | Payment details for each order. | `payment_id`, `order_id`, `payment_date`, `payment_method`, `amount` |
 |  **returns** | Information about returned products and reasons. | `return_id`, `order_id`, `product_id`, `return_date`, `reason` |
+
 
 ## 🎯 Key Business Questions Solved  
 
@@ -40,17 +42,20 @@ The goal is to simulate real-world business problems and demonstrate how **data 
 - Which region gives the highest revenue vs. highest returns?
 
 ---
+
 ## 🧠 Highlight SQL Queries  
 
-### 💰 Profit Margin per Product  
+###  Profit Margin per Product  
 ```sql
 SELECT 
     product_name, 
     (price - cost_price) AS profit_margin
 FROM products
-ORDER BY profit_margin DESC; 
+ORDER BY profit_margin DESC;
+```
 
-Highest Return Rate
+### Highest Return Rate
+```sql
 SELECT 
     p.product_name,
     COUNT(r.return_id) AS total_returns,
@@ -61,8 +66,10 @@ LEFT JOIN order_details od ON p.product_id = od.product_id
 LEFT JOIN returns r ON r.product_id = p.product_id
 GROUP BY p.product_name
 ORDER BY return_rate DESC;
+```
 
-Lifetime Value (LTV) of Customers
+### Lifetime Value (LTV) of Customers
+```sql
 SELECT 
     c.customer_id,
     c.name,
@@ -73,8 +80,10 @@ LEFT JOIN returns r ON o.order_id = r.order_id
 LEFT JOIN products p ON r.product_id = p.product_id
 GROUP BY c.customer_id, c.name
 ORDER BY lifetime_value DESC;
+```
 
-Revenue vs Returns by Region
+### Revenue vs Returns by Region
+```sql
 SELECT 
     c.region,
     SUM(o.total_amount) AS total_revenue,
@@ -86,8 +95,10 @@ LEFT JOIN returns r ON o.order_id = r.order_id
 LEFT JOIN products p ON r.product_id = p.product_id
 GROUP BY c.region
 ORDER BY net_revenue DESC;
+```
 
-Seasonal Sales Trends
+### Seasonal Sales Trends
+```sql
 SELECT 
     MONTHNAME(order_date) AS month,
     COUNT(order_id) AS total_orders,
@@ -95,4 +106,18 @@ SELECT
 FROM orders
 GROUP BY MONTH(order_date), MONTHNAME(order_date)
 ORDER BY MONTH(order_date);
+```
 
+## 📈 Sample Insights
+### Insight	Description
+- Top Month:	December shows the highest sales — likely festive impact.
+- Top Region:	North region contributes 40% of total revenue.
+- LTV Trend:	Loyal customers with fewer returns generate the most profit.
+- Top Category:	Electronics has the highest margins but also more returns.
+
+## 💼 Project Highlights
+
+- Designed a normalized retail database (6+ tables)
+- Wrote 20+ advanced analytical SQL queries
+- Identified trends, profit drivers, and return patterns
+- Built a clean, insight-focused project ideal for a Data Analyst portfolio
