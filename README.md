@@ -68,7 +68,7 @@ GROUP BY p.product_name
 ORDER BY return_rate DESC;
 ```
 
-###  Lifetime Value (LTV) of Customers
+###   Lifetime Value (LTV) of Customers
 ```sql
 SELECT 
     c.customer_id,
